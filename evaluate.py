@@ -19,10 +19,10 @@ def main():
     for line in sys.stdin:
         theta_list = line.split()
         if len(theta_list) != 2 or is_number(theta_list[0]) is False or is_number(theta_list[1]) is False:
-            print("Estimated price = ", estimated_price)
+            print(f"Estimated price = {estimated_price}")
             continue
         estimated_price = float(mileage) * float(theta_list[1]) + float(theta_list[0])
-        print("Estimated price = ", estimated_price)
+        print(f"Estimated price = {estimated_price}")
         break
 
 
