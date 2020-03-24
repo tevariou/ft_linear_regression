@@ -23,13 +23,16 @@ def read_theta():
 
 def main():
     model.train()
-    mileage = None
-    while is_number(mileage) is False:
-        mileage = input("What's your car mileage?\n")
+    mileage = input("What's your car mileage?\n")
+    if is_number(mileage) is False or float(mileage) < 0:
+        print('Invalid mileage')
+        return
     theta1, theta0 = read_theta()
     x, y, size = model.read_data()
     mileage = (float(mileage) - np.amin(x)) / (np.amax(x) - np.amin(x))
     estimated_price = model.denormalize(theta1 * mileage + theta0, np.amin(y), np.amax(y))
+    if estimated_price < 0:
+        estimated_price = 0
     print("Estimated price = ", estimated_price)
 
 
