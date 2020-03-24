@@ -4,10 +4,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def normalize_y(y):
-    a_min = np.amin(y)
-    a_max = np.amax(y)
-    return (y - a_min) / (a_max - a_min)
+def normalize(array):
+    a_min = np.amin(array)
+    a_max = np.amax(array)
+    return (array - a_min) / (a_max - a_min)
+
+
+def denormalize(array, a_min, a_max):
+    return array * (a_max - a_min) + a_min
 
 
 def normalize_x(x):
@@ -41,17 +45,23 @@ def fetch_data():
     return np.array(x), np.array(y)
 
 
+def a_min_max(array):
+    return np.amin(array), np.amax(array)
+
+
 def main():
     x, y = fetch_data()
+    x_min, x_max = a_min_max(x)
+    y_min, y_max = a_min_max(y)
     new_x = normalize_x(x)
-    alter_x = normalize_y(x)
-    new_y = normalize_y(y)
+    alter_x = normalize(x)
+    new_y = normalize(y)
     theta = np.array([[0],
                      [0]])
-    alpha = 0.001
+    alpha = 0.1
     size, _ = np.shape(new_x)
-    for i in range(100000):
-        if i % 10000 == 0:
+    for i in range(1000):
+        if i % 100 == 0:
             plt.plot([0, 1], [theta[0, 0] * 0 + theta[1, 0], theta[0, 0] * 1 + theta[1, 0]])
         grad = alpha / size * np.dot(new_x.T, np.dot(new_x, theta) - new_y)
         theta = theta - grad
