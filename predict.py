@@ -1,6 +1,6 @@
-import model
 import csv
-import numpy as np
+from helpers import read_data, estim
+from os import path
 
 
 def is_number(s):
@@ -21,19 +21,20 @@ def read_theta():
             return float(row['theta1']), float(row['theta0'])
 
 
-def main():
-    model.train()
+def predict():
+    if not path.exists("theta.csv"):
+        print(f"Please run train.py first")
+        return
     mileage = input("What's your car mileage?\n")
     if is_number(mileage) is False or float(mileage) < 0:
         print('Invalid mileage')
         return
     theta1, theta0 = read_theta()
-    x, y, size = model.read_data()
-    mileage = (float(mileage) - np.amin(x)) / (np.amax(x) - np.amin(x))
-    estimated_price = model.denormalize(theta1 * mileage + theta0, np.amin(y), np.amax(y))
+    x, y, size = read_data()
+    estimated_price = estim(float(mileage), theta1, theta0, y)
     if estimated_price < 0:
         estimated_price = 0
-    print("Estimated price = ", estimated_price)
+    print("Estimated price = {:.2f}".format(estimated_price))
 
 
-main()
+predict()
