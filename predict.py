@@ -25,6 +25,9 @@ def predict():
     if not path.exists("theta.csv"):
         print(f"Please run train.py first")
         return
+    if not path.exists("data.csv"):
+        print(f"Data is missing")
+        return
     mileage = input("What's your car mileage?\n")
     if is_number(mileage) is False or float(mileage) < 0:
         print('Invalid mileage')

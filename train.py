@@ -2,6 +2,7 @@ import csv
 import matplotlib.pyplot as plt
 from helpers import read_data, denormalize, normalize, estim
 import math
+from os import path
 
 
 def plot(theta1, theta0, y, iteration, rmse):
@@ -26,6 +27,9 @@ def estimated_price(km, theta1, theta0):
 
 
 def train():
+    if not path.exists("data.csv"):
+        print(f"Data is missing")
+        return
     x, y, m = read_data()
     km = normalize(x)
     price = normalize(y)
