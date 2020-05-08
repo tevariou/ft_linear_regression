@@ -39,7 +39,6 @@ def predict():
         return
     theta1, theta0 = read_theta()
     x, y, size = read_data()
-    mileage = float(mileage)
     estimated_price = estim(normalize(float(mileage), x), theta1, theta0, y)
     if estimated_price < 0:
         estimated_price = 0
