@@ -1,8 +1,13 @@
 import csv
 import matplotlib.pyplot as plt
-from helpers import read_data, denormalize, normalize, estim
+from helpers import read_data, denormalize, estim
 import math
+import numpy as np
 from os import path
+
+
+def normalize(value):
+    return ((value - np.amin(value)) / (np.amax(value) - np.amin(value))).tolist()
 
 
 def plot(theta1, theta0, y, iteration, rmse):

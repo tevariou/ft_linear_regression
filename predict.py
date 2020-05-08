@@ -1,6 +1,7 @@
 import csv
 from helpers import read_data, estim
 from os import path
+import numpy as np
 
 
 def is_number(s):
@@ -21,6 +22,10 @@ def read_theta():
             return float(row['theta1']), float(row['theta0'])
 
 
+def normalize(value, ref):
+    return (value - np.amin(ref)) / (np.amax(ref) - np.amin(ref))
+
+
 def predict():
     if not path.exists("theta.csv"):
         print(f"Please run train.py first")
@@ -34,7 +39,8 @@ def predict():
         return
     theta1, theta0 = read_theta()
     x, y, size = read_data()
-    estimated_price = estim(float(mileage), theta1, theta0, y)
+    mileage = float(mileage)
+    estimated_price = estim(normalize(float(mileage), x), theta1, theta0, y)
     if estimated_price < 0:
         estimated_price = 0
     print("Estimated price = {:.2f}".format(estimated_price))

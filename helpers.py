@@ -20,9 +20,5 @@ def denormalize(value, ref):
     return value * (np.amax(ref) - np.amin(ref)) + np.amin(ref)
 
 
-def normalize(value):
-    return ((value - np.amin(value)) / (np.amax(value) - np.amin(value))).tolist()
-
-
 def estim(x, theta1, theta0, y):
     return denormalize(theta1 * x + theta0, y)
