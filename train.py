@@ -50,8 +50,10 @@ def train():
             # root mean squared error
             rmse = math.sqrt(mse)
             plot(theta1, theta0, y, i, rmse)
-        theta1 = theta1 - alpha * 1 / m * sum(map(lambda a, b: a * (estimated_price(a, theta1, theta0) - b), km, price))
-        theta0 = theta0 - alpha * 1 / m * sum(map(lambda a, b: estimated_price(a, theta1, theta0) - b, km, price))
+        tmp_theta1 = alpha * 1 / m * sum(map(lambda a, b: a * (estimated_price(a, theta1, theta0) - b), km, price))
+        tmp_theta0 = alpha * 1 / m * sum(map(lambda a, b: estimated_price(a, tmp_theta1, tmp_theta0) - b, km, price))
+        theta1 = theta1 - tmp_theta1
+        theta0 = theta0 - tmp_theta0
     plt.xlabel('km')
     plt.ylabel('price')
     plt.scatter(x, y)
