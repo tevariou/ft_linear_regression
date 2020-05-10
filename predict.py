@@ -21,14 +21,14 @@ def read_theta():
 
 
 def predict():
-    if not path.exists("theta.csv"):
-        print("Please run train.py first")
-        return
+
     mileage = input("What's your car mileage?\n")
     if is_number(mileage) is False or float(mileage) < 0:
         print('Invalid mileage')
         return
-    theta1, theta0 = read_theta()
+    theta1, theta0 = 0, 0
+    if path.exists("theta.csv"):
+        theta1, theta0 = read_theta()
     estimated_price = float(mileage) * theta1 + theta0
     if estimated_price < 0:
         estimated_price = 0
