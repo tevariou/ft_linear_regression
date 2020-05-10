@@ -21,7 +21,6 @@ def read_theta():
 
 
 def predict():
-
     mileage = input("What's your car mileage?\n")
     if is_number(mileage) is False or float(mileage) < 0:
         print('Invalid mileage')
