@@ -67,7 +67,7 @@ def train():
     theta0 = 0
     # learning rate
     alpha = 0.1
-    iterations = 1000
+    iterations = 1500
     for i in range(iterations):
         if i % (iterations / 10) == 0:
             plot(theta1, theta0, y, x, m, i)
