@@ -24,7 +24,7 @@ def normalize(value):
 
 def denormalize(theta1, theta0, x, y):
     theta1 = theta1 * (max(y) - min(y)) / (max(x) - min(x))
-    theta0 = - theta1 * min(x) + theta0 * (max(y) - min(y)) + min(y)
+    theta0 = theta0 * (max(y) - min(y)) + min(y) - theta1 * min(x)
     return theta1, theta0
 
 
