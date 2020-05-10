@@ -61,7 +61,6 @@ def train():
     theta0 = 0
     if not path.exists("data.csv"):
         print("Data is missing")
-        write_theta(theta1, theta0)
         return
     x, y, m = read_data()
     mileage = normalize(x)
