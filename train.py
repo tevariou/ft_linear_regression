@@ -57,14 +57,14 @@ def estimated_price(km, theta1, theta0):
 
 
 def train():
-    theta1 = 0
-    theta0 = 0
     if not path.exists("data.csv"):
         print("Data is missing")
         return
     x, y, m = read_data()
     mileage = normalize(x)
     price = normalize(y)
+    theta1 = 0
+    theta0 = 0
     # learning rate
     alpha = 0.1
     iterations = 1000
