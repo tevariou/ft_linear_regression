@@ -18,6 +18,15 @@ def read_data():
     return x, y, size
 
 
+def write_theta(theta1, theta0):
+    with open("theta.csv", 'w') as csv_file:
+        fieldnames = ['theta1', 'theta0']
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow({'theta1': f'{theta1}', 'theta0': f'{theta0}'})
+        csv_file.close()
+
+
 def normalize(value):
     return [*map(lambda a: (a - min(value)) / (max(value) - min(value)), value)]
 
@@ -41,15 +50,6 @@ def plot(theta1, theta0, y, x, m, iteration):
              'theta0 = {:.2f} ' \
              'root mean squared error = {:.2f}'.format(iteration, theta1, theta0, rmse)
     plt.plot([0, 250000], [theta0, theta1 * 250000 + theta0], label=legend)
-
-
-def write_theta(theta1, theta0):
-    with open("theta.csv", 'w') as csv_file:
-        fieldnames = ['theta1', 'theta0']
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerow({'theta1': f'{theta1}', 'theta0': f'{theta0}'})
-        csv_file.close()
 
 
 def estimated_price(km, theta1, theta0):
